@@ -1059,3 +1059,135 @@ img{max-width:100%}
   opacity:.42;
   color:rgba(213,91,139,.28);
 }
+
+/* ==========================================================================
+   Modificări din mockup-ul v29: pagina de start devine O SINGURĂ foaie de
+   hârtie cu margine festonată, care cuprinde atât colajul de sus, cât și
+   secțiunea Fondatoare (fără festoane între ele).
+   Clasa nouă .home-long-frame este folosită în app/page.js.
+   ========================================================================== */
+
+/* V27 – one continuous scalloped paper frame; both sections stay in normal flow */
+.paper-panel.home-long-frame{
+  position:relative;
+  height:auto !important;
+  min-height:calc(100svh - 36px);
+  overflow:hidden;
+  isolation:isolate;
+  background:var(--pale);
+}
+.paper-panel.home-long-frame:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    radial-gradient(circle at 31px 0,var(--pink) 0 29px,transparent 30px) 0 0/62px 32px repeat-x,
+    radial-gradient(circle at 31px 100%,var(--pink) 0 29px,transparent 30px) 0 100%/62px 32px repeat-x,
+    radial-gradient(circle at 0 31px,var(--pink) 0 29px,transparent 30px) 0 0/32px 62px repeat-y,
+    radial-gradient(circle at 100% 31px,var(--pink) 0 29px,transparent 30px) 100% 0/32px 62px repeat-y;
+}
+.paper-panel.home-long-frame:after{
+  content:"";
+  position:absolute;
+  inset:31px;
+  z-index:-1;
+  background:var(--pale);
+}
+.paper-panel.home-long-frame > .home-panel{
+  position:relative;
+  z-index:1;
+  width:100%;
+  min-height:640px;
+  height:calc(100svh - 36px);
+  background:transparent;
+  overflow:visible;
+}
+.paper-panel.home-long-frame > .founders-section{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:none;
+  margin:0;
+  min-height:0;
+  background:
+    linear-gradient(180deg,
+      #F5CEDA 0%,
+      rgba(249,222,233,.96) 11%,
+      rgba(255,241,246,.90) 30%,
+      rgba(255,232,241,.88) 58%,
+      #F8D6E2 100%) !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+}
+.paper-panel.home-long-frame > .founders-section:before{content:none !important;display:none !important}
+@media(max-width:700px){
+  .paper-panel.home-long-frame > .home-panel{min-height:760px;height:100svh}
+}
+
+/* One shared paper sheet: scallops belong only to the outside wrapper. */
+.paper-panel.home-long-frame{
+  position:relative !important;
+  display:flow-root;
+  height:auto !important;
+  min-height:calc(100svh - 36px);
+  overflow:hidden;
+  isolation:isolate;
+  background:var(--pale) !important;
+}
+.paper-panel.home-long-frame:before{
+  content:"" !important;
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 31px 0,var(--pink) 0 29px,transparent 30px) 0 0/62px 32px repeat-x,
+    radial-gradient(circle at 31px 100%,var(--pink) 0 29px,transparent 30px) 0 100%/62px 32px repeat-x,
+    radial-gradient(circle at 0 31px,var(--pink) 0 29px,transparent 30px) 0 0/32px 62px repeat-y,
+    radial-gradient(circle at 100% 31px,var(--pink) 0 29px,transparent 30px) 100% 0/32px 62px repeat-y;
+}
+.paper-panel.home-long-frame:after{
+  content:"" !important;
+  position:absolute;
+  inset:31px;
+  z-index:0;
+  pointer-events:none;
+  background:linear-gradient(180deg,#F9E2EA 0%,#F9E3EB 42%,#F7D9E4 100%);
+}
+.paper-panel.home-long-frame > .home-panel,
+.paper-panel.home-long-frame > .founders-section{
+  position:relative;
+  z-index:1;
+  width:auto;
+}
+.paper-panel.home-long-frame > .home-panel{
+  min-height:640px;
+  height:calc(100svh - 36px);
+  background:transparent !important;
+  overflow:visible;
+}
+/* No decorative scallop row or separate panel fill between the two sections. */
+.paper-panel.home-long-frame > .founders-section{
+  max-width:none;
+  width:auto;
+  margin:0;
+  background:transparent !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  isolation:visible;
+}
+.paper-panel.home-long-frame > .founders-section:before,
+.paper-panel.home-long-frame > .founders-section:after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+@media(max-width:700px){
+  .paper-panel.home-long-frame > .home-panel{
+    min-height:760px;
+    height:100svh;
+  }
+}
