@@ -1191,3 +1191,102 @@ img{max-width:100%}
     height:100svh;
   }
 }
+
+
+/* ==========================================================================
+   CORECTURI PENTRU TELEFON ȘI TABLETĂ
+   --------------------------------------------------------------------------
+   Regulile de mai jos repară așezarea pe ecrane mici. Sunt puse LA FINAL
+   ca să aibă prioritate față de cele de mai sus (în CSS, la reguli la fel
+   de specifice, câștigă cea scrisă ultima).
+   ========================================================================== */
+
+/* 1. Fotografiile „lipite cu bandă” (pe orice ecran)
+      Cutia fotografiei avea o înălțime fixă (în procente), iar poza era
+      micșorată în interiorul ei. Pe ecrane de lățime medie poza ajungea
+      mai jos decât banda adezivă, iar banda „plutea” deasupra ei.
+      Acum cutia are exact înălțimea pozei, deci banda stă pe marginea ei. */
+.scrap{height:auto}
+.scrap img{height:auto}
+
+/* 2. Telefoane și tablete mici (lățime de cel mult 760px)
+      Aici pagina de start nu mai e un colaj cu elemente așezate liber,
+      ci o coloană: logo → text → buton → fotografii → ilustrații. */
+@media (max-width: 760px){
+
+  /* Fundalul „fixed” nu e suportat pe multe telefoane (mai ales iPhone)
+     și poate apărea tăiat. Pe telefon îl lăsăm să se deruleze normal. */
+  body{background-attachment:scroll}
+
+  /* Marginea festonată a foii, la aceeași mărime ca pe celelalte pagini
+     pe telefon (cercuri mai mici, ca să nu acopere conținutul). */
+  .paper-panel.home-long-frame:before{
+    background-size:48px 25px,48px 25px,25px 48px,25px 48px;
+  }
+  .paper-panel.home-long-frame:after{inset:24px}
+
+  /* Colajul își ia înălțimea după conținut (înainte era blocat la
+     înălțimea ecranului, iar ilustrațiile se revărsau peste
+     secțiunea „Fondatoare”). Marginile laterale țin conținutul
+     în interiorul festoanelor. */
+  .paper-panel.home-long-frame > .home-panel{
+    height:auto;
+    min-height:0;
+    padding:0 26px 34px;
+    text-align:center;
+  }
+
+  /* Folderul „Find out more”, mutat în interiorul festoanelor */
+  .folder-trigger{top:30px;left:30px;width:76px}
+  .folder-trigger img{width:76px}
+  .folder-menu{top:122px;left:28px}
+
+  /* Textul „în colaborare cu…”: anulăm deplasarea spre stânga moștenită
+     de la desktop (transform) și îl așezăm în dreapta folderului. */
+  .collab{
+    transform:none;
+    margin:40px 0 0;
+    padding-left:84px;
+    min-height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:normal;
+  }
+
+  .hero-paper{margin-top:26px}
+
+  /* Butonul „Alătură-te”: centrat pe rândul lui, fără deplasarea
+     de la desktop, ca să nu mai fie tăiat în stânga ecranului. */
+  .join-cta{
+    display:flex!important;
+    transform:none;
+    margin:22px auto 0;
+  }
+  .join-cta:hover{transform:translateY(-2px)}
+
+  /* Fotografiile: două pe un rând, aliniate sus, cu loc pentru bandă */
+  .scrap{margin-top:40px;vertical-align:top}
+  .scrap-right{margin-top:56px}
+
+  /* Ilustrațiile: rămân în colaj, nu mai ies peste secțiunea următoare */
+  .doodle{margin-top:18px;margin-bottom:0}
+
+  /* Secțiunea Fondatoare, cu loc față de festoane */
+  .paper-panel.home-long-frame > .founders-section{
+    padding:34px 30px 60px;
+  }
+  .founders-heading h2 .founders-script{display:block;margin:4px 0 0}
+}
+
+/* 3. Telefoane înguste (cel mult 480px) */
+@media (max-width: 480px){
+  .paper-panel.home-long-frame > .home-panel{padding:0 22px 30px}
+  .folder-trigger{top:28px;left:26px;width:66px}
+  .folder-trigger img{width:66px}
+  .folder-menu{top:108px;left:24px}
+  .collab{padding-left:72px;margin-top:36px;font-size:11px}
+  .scrap{width:44%;margin-left:2%;margin-right:2%}
+  .doodle{width:44%;margin-left:2%;margin-right:2%}
+  .paper-panel.home-long-frame > .founders-section{padding:28px 26px 56px}
+}
