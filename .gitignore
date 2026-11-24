@@ -1,0 +1,18 @@
+# Fișiere pe care Git NU trebuie să le salveze în repository.
+
+# Pachetele descărcate de `npm install` (se pot reinstala oricând)
+/node_modules
+
+# Fișierele generate de Next.js când pornești sau construiești site-ul
+/.next/
+/out/
+
+# Fișiere de sistem și jurnale de erori
+.DS_Store
+npm-debug.log*
+
+# Fișiere cu setări secrete (parole, chei) – nu le publica niciodată
+.env*.local
+
+# Fișiere create de Vercel (hostul pe care publicăm site-ul)
+.vercel
